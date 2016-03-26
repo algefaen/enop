@@ -1,0 +1,1 @@
+- Fix rare timing issue on Linux 32 bits (approx. once every month)

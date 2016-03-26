@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="90">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="../.." name="0">
+      <in>YAccelerometer.cpp</in>
+      <in>YAnButton.cpp</in>
+      <in>YCarbonDioxide.cpp</in>
+      <in>YColorLed.cpp</in>
+      <in>YCompass.cpp</in>
+      <in>YCurrent.cpp</in>
+      <in>YDataLogger.cpp</in>
+      <in>YDigitalIO.cpp</in>
+      <in>YDisplay.cpp</in>
+      <in>YDualPower.cpp</in>
+      <in>YFiles.cpp</in>
+      <in>YGenericSensor.cpp</in>
+      <in>YGyro.cpp</in>
+      <in>YHubPort.cpp</in>
+      <in>YHumidity.cpp</in>
+      <in>YLed.cpp</in>
+      <in>YLightSensor.cpp</in>
+      <in>YMagnetometer.cpp</in>
+      <in>YModule.cpp</in>
+      <in>YNetwork.cpp</in>
+      <in>YPower.cpp</in>
+      <in>YPressure.cpp</in>
+      <in>YPwmOutput.cpp</in>
+      <in>YPwmPowerSource.cpp</in>
+      <in>YRealTimeClock.cpp</in>
+      <in>YRefFrame.cpp</in>
+      <in>YRelay.cpp</in>
+      <in>YSensor.cpp</in>
+      <in>YServo.cpp</in>
+      <in>YTemperature.cpp</in>
+      <in>YTilt.cpp</in>
+      <in>YVoc.cpp</in>
+      <in>YVoltage.cpp</in>
+      <in>YWakeUpMonitor.cpp</in>
+      <in>YWakeUpSchedule.cpp</in>
+      <in>YWatchdog.cpp</in>
+      <in>YWireless.cpp</in>
+      <in>_Ignore.cpp</in>
+      <in>cmdline_common.cpp</in>
+      <in>cmdline_common.h</in>
+    </df>
+    <df root="../../../../cpp/Sources" name="1">
+      <df name="yapi">
+        <in>yapi.c</in>
+        <in>yapi.h</in>
+        <in>ydef.h</in>
+        <in>yfifo.c</in>
+        <in>yfifo.h</in>
+        <in>yhash.c</in>
+        <in>yhash.h</in>
+        <in>yjson.c</in>
+        <in>yjson.h</in>
+        <in>ykey.c</in>
+        <in>ykey.h</in>
+        <in>ymemory.c</in>
+        <in>ymemory.h</in>
+        <in>ypkt_lin.c</in>
+        <in>ypkt_osx.c</in>
+        <in>ypkt_win.c</in>
+        <in>yprog.c</in>
+        <in>yprog.h</in>
+        <in>yproto.h</in>
+        <in>ystream.c</in>
+        <in>ytcp.c</in>
+        <in>ytcp.h</in>
+        <in>ythread.c</in>
+        <in>ythread.h</in>
+        <in>yversion.h</in>
+      </df>
+      <in>yocto_accelerometer.cpp</in>
+      <in>yocto_accelerometer.h</in>
+      <in>yocto_anbutton.cpp</in>
+      <in>yocto_anbutton.h</in>
+      <in>yocto_api.cpp</in>
+      <in>yocto_api.h</in>
+      <in>yocto_avgperiodstart.cpp</in>
+      <in>yocto_avgperiodstart.h</in>
+      <in>yocto_avgperiodstop.cpp</in>
+      <in>yocto_avgperiodstop.h</in>
+      <in>yocto_carbondioxide.cpp</in>
+      <in>yocto_carbondioxide.h</in>
+      <in>yocto_colorled.cpp</in>
+      <in>yocto_colorled.h</in>
+      <in>yocto_compass.cpp</in>
+      <in>yocto_compass.h</in>
+      <in>yocto_current.cpp</in>
+      <in>yocto_current.h</in>
+      <in>yocto_datalogger.cpp</in>
+      <in>yocto_datalogger.h</in>
+      <in>yocto_digitalio.cpp</in>
+      <in>yocto_digitalio.h</in>
+      <in>yocto_display.cpp</in>
+      <in>yocto_display.h</in>
+      <in>yocto_dualpower.cpp</in>
+      <in>yocto_dualpower.h</in>
+      <in>yocto_files.cpp</in>
+      <in>yocto_files.h</in>
+      <in>yocto_genericsensor.cpp</in>
+      <in>yocto_genericsensor.h</in>
+      <in>yocto_gyro.cpp</in>
+      <in>yocto_gyro.h</in>
+      <in>yocto_hubport.cpp</in>
+      <in>yocto_hubport.h</in>
+      <in>yocto_humidity.cpp</in>
+      <in>yocto_humidity.h</in>
+      <in>yocto_led.cpp</in>
+      <in>yocto_led.h</in>
+      <in>yocto_lightsensor.cpp</in>
+      <in>yocto_lightsensor.h</in>
+      <in>yocto_magnetometer.cpp</in>
+      <in>yocto_magnetometer.h</in>
+      <in>yocto_network.cpp</in>
+      <in>yocto_network.h</in>
+      <in>yocto_oscontrol.cpp</in>
+      <in>yocto_oscontrol.h</in>
+      <in>yocto_power.cpp</in>
+      <in>yocto_power.h</in>
+      <in>yocto_pressure.cpp</in>
+      <in>yocto_pressure.h</in>
+      <in>yocto_realtimeclock.cpp</in>
+      <in>yocto_realtimeclock.h</in>
+      <in>yocto_refframe.cpp</in>
+      <in>yocto_refframe.h</in>
+      <in>yocto_relay.cpp</in>
+      <in>yocto_relay.h</in>
+      <in>yocto_servo.cpp</in>
+      <in>yocto_servo.h</in>
+      <in>yocto_temperature.cpp</in>
+      <in>yocto_temperature.h</in>
+      <in>yocto_tilt.cpp</in>
+      <in>yocto_tilt.h</in>
+      <in>yocto_timestamp.cpp</in>
+      <in>yocto_timestamp.h</in>
+      <in>yocto_voc.cpp</in>
+      <in>yocto_voc.h</in>
+      <in>yocto_voltage.cpp</in>
+      <in>yocto_voltage.h</in>
+      <in>yocto_voltageavg.cpp</in>
+      <in>yocto_voltageavg.h</in>
+      <in>yocto_voltagerunavg.cpp</in>
+      <in>yocto_voltagerunavg.h</in>
+      <in>yocto_wakeupmonitor.cpp</in>
+      <in>yocto_wakeupmonitor.h</in>
+      <in>yocto_wakeupschedule.cpp</in>
+      <in>yocto_wakeupschedule.h</in>
+      <in>yocto_watchdog.cpp</in>
+      <in>yocto_watchdog.h</in>
+      <in>yocto_wireless.cpp</in>
+      <in>yocto_wireless.h</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>../../../Binaries/GNUmakefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>../..</Elem>
+    <Elem>../../../../cpp/Sources</Elem>
+  </sourceRootList>
+  <projectmakefile>../../../Binaries/GNUmakefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../../Binaries</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f GNUmakefile</buildCommand>
+          <cleanCommand>${MAKE} -f GNUmakefile clean</cleanCommand>
+          <executablePath>../../../Binaries/osx/YModule</executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="../../../../cpp/Sources/yapi/yapi.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yapi.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ydef.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yfifo.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yfifo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yhash.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yhash.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yjson.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yjson.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ykey.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ykey.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ymemory.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ymemory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ypkt_lin.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ypkt_osx.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ypkt_win.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yprog.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yprog.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yproto.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ystream.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ytcp.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ytcp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ythread.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/ythread.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yapi/yversion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_accelerometer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_accelerometer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_anbutton.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_anbutton.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_api.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_api.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_avgperiodstart.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_avgperiodstart.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_avgperiodstop.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_avgperiodstop.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_carbondioxide.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_carbondioxide.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_colorled.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_colorled.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_compass.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_compass.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_current.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_current.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_datalogger.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_datalogger.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_digitalio.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_digitalio.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_display.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_display.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_dualpower.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_dualpower.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_files.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_files.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_genericsensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_genericsensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_gyro.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_gyro.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_hubport.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_hubport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_humidity.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_humidity.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_led.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_led.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_lightsensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_lightsensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_magnetometer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_magnetometer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_network.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_network.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_oscontrol.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_oscontrol.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_power.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_power.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_pressure.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_pressure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_realtimeclock.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_realtimeclock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_refframe.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_refframe.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_relay.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_relay.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_servo.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_servo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_temperature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_temperature.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_tilt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_tilt.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_timestamp.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_timestamp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voc.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltage.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltageavg.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltageavg.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltagerunavg.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_voltagerunavg.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wakeupmonitor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wakeupmonitor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wakeupschedule.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wakeupschedule.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_watchdog.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_watchdog.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wireless.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../cpp/Sources/yocto_wireless.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../YAccelerometer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YAnButton.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YCarbonDioxide.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YColorLed.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YCompass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YCurrent.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YDataLogger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YDigitalIO.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YDisplay.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YDualPower.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YFiles.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YGenericSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YGyro.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YHubPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YHumidity.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YLed.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YLightSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YMagnetometer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YNetwork.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YPower.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YPressure.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YPwmOutput.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YPwmPowerSource.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YRealTimeClock.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YRefFrame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YRelay.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YServo.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YTemperature.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YTilt.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YVoc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YVoltage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YWakeUpMonitor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YWakeUpSchedule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YWatchdog.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../YWireless.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../_Ignore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../cmdline_common.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../../cmdline_common.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
