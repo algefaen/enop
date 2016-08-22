@@ -1,0 +1,2 @@
+This folder contains scripts that parse OGN data streams,
+and uploades the data to various elasticsearch dbs.
