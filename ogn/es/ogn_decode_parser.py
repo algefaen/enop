@@ -7,10 +7,8 @@ import argparse
 
 # Requires elasticsearch python package
 # > pip install elasticsearch
-# Probably also requires some other stuff like perl
 
 # Global configuration:
-# Elastic type name, mostly don't care so naming it loc
 elastic_type = "loc"
 elastic_index = "enop_flarm"
 
@@ -21,13 +19,24 @@ def main():
 	parser = argparse.ArgumentParser(description="Parse OGN decode stream and upload to ES")
 	parser.add_argument("--dry-run", action="store_true", help="Do not upload")
 	parser.add_argument("--input-file", help="Read OGN decode data from file instead of stdin. Note that this will timestamp all entries with current time.")
-	parser.add_argument("--no-pass-through", help="Do not print out the decode stream during decoding", action="store_true")
-	parser.add_argument("--es-server", help="URL:port to elasticsearch", default="localhost:9200")
+	parser.add_argument("--no-pass-through", help="Do not print out the input stream during decoding", action="store_true")
 	args = parser.parse_args()
+
+	with open("configuration.json") as file:
+		configuration = json.load(file)
 
 	
 	# Setup
-	es = Elasticsearch([args.es_server])
+	if configuration["auth"]:
+		es = Elasticsearch(
+			[configuration["host"]],
+			http_auth=(configuration["username"], configuration["password"]),
+			port=configuration["port"],
+			use_ssl=True,
+			verify_certs=False
+		)
+	else:
+		es = Elasticsearch([configuration["host"]])
 
 
 	# Attempt to write a typemapping first
@@ -74,35 +83,40 @@ def parseline(line):
 
 	if not fieldsre: 
 		return
-	data = {}
 
-	# 1 indexed	
-	data["mhz"] = float(fieldsre.group(1))
-	data["identifier"] = fieldsre.group(2)
-	data["position"] = fieldsre.group(3).replace(" ","").replace("[","").replace("]","")
-	data["altitude"] = float(fieldsre.group(4))
-	data["vertical_speed"] = float(fieldsre.group(5))
-	data["speed"] = float(fieldsre.group(6))
-	data["heading"] = float(fieldsre.group(7))
-	data["heading_change"] = float(fieldsre.group(8))
-	data["signal_strength"] = float(fieldsre.group(13))
-	data["distance"] = float(fieldsre.group(15))
-	data["bearing"] = float(fieldsre.group(16))
+	try:
+		data = {}
 
-	rightnow = datetime.datetime.now()
-	data["timestamp"] = rightnow.isoformat()
+		# 1 indexed	
+		data["mhz"] = float(fieldsre.group(1))
+		data["identifier"] = fieldsre.group(2)
+		data["position"] = fieldsre.group(3).replace(" ","").replace("[","").replace("]","")
+		data["altitude"] = float(fieldsre.group(4))
+		data["vertical_speed"] = float(fieldsre.group(5))
+		data["speed"] = float(fieldsre.group(6))
+		data["heading"] = float(fieldsre.group(7))
+		data["heading_change"] = float(fieldsre.group(8))
+		data["signal_strength"] = float(fieldsre.group(13))
+		data["distance"] = float(fieldsre.group(15))
+		data["bearing"] = float(fieldsre.group(16))
 
-	# Month based indexing:
-	#timeindex = "enop_flarm-"+str(rightnow.year)+"-"+str(rightnow.month)
-	# Week based indexing:
-	(year,week, dontcare) = rightnow.isocalendar()
-	timeindex = "enop_flarm-"+str(year)+"-w"+str(week)
+		rightnow = datetime.datetime.now()
+		data["timestamp"] = rightnow.isoformat()
 
-	# Ship the data!
-	if not args.dry_run:
-		es.index(index=timeindex, doc_type=elastic_type, body=json.dumps(data))
+		# Month based indexing:
+		#timeindex = "enop_flarm-"+str(rightnow.year)+"-"+str(rightnow.month)
+		# Week based indexing:
+		(year,week, dontcare) = rightnow.isocalendar()
+		timeindex = "enop_flarm-"+str(year)+"-w"+str(week)
 
-	print "** UPLOADED TO ES: **", data
+		# Ship the data!
+		if not args.dry_run:
+			es.index(index=timeindex, doc_type=elastic_type, body=json.dumps(data))
+
+		print "** UPLOADED TO ES: **", data
+
+	except:
+		print "** Something went wrong with ogn_decode_parser: ",sys.exc_info()
 
 
 main()
