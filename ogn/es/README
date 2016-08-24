@@ -1,0 +1,6 @@
+This folder contains scripts that parse OGN data streams,
+and uploades the data to various elasticsearch dbs.
+
+Copy configuration.json.template to configuration.json
+and modify to match your elasticsearch instance.
+
