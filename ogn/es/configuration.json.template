@@ -2,6 +2,7 @@
 "host" : "localhost",
 "port" : 9200,
 "auth": false,
+"use_ssl" : false,
 "username" : "",
 "password" : ""
 }

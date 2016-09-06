@@ -1,6 +1,8 @@
 import re
 import sys
+import os
 import datetime
+import urllib3
 from elasticsearch import Elasticsearch
 import json
 import argparse
@@ -14,7 +16,7 @@ elastic_index = "enop_flarm"
 
 
 def main():
-	global es, args
+	global ess, args
 
 	parser = argparse.ArgumentParser(description="Parse OGN decode stream and upload to ES")
 	parser.add_argument("--dry-run", action="store_true", help="Do not upload")
@@ -22,26 +24,30 @@ def main():
 	parser.add_argument("--no-pass-through", help="Do not print out the input stream during decoding", action="store_true")
 	args = parser.parse_args()
 
-	with open("configuration.json") as file:
+	# Supports one or multiple configurations
+	with open(os.path.dirname(__file__)+"/configuration.json") as file:
 		configuration = json.load(file)
+		configuration = [configuration] if isinstance(configuration, dict) else configuration
+
+	# Disable warnings of missing SSL certs in urllib3
+	# If you want this checking, it should go through the elasticsearch lib and verify_certs
+	urllib3.disable_warnings()
+
+	# Elasticsearch instances
+	ess = []
+	for config in configuration:
+		instance = Elasticsearch(
+			[config["host"]],
+			http_auth=(config["username"], config["password"]),
+			port=config["port"],
+			use_ssl=config["use_ssl"],
+			verify_certs=False #TODO: Reenable when you have working root certs
+		)
+		ess.append(instance)
 
 	
-	# Setup
-	if configuration["auth"]:
-		es = Elasticsearch(
-			[configuration["host"]],
-			http_auth=(configuration["username"], configuration["password"]),
-			port=configuration["port"],
-			use_ssl=True,
-			verify_certs=False
-		)
-	else:
-		es = Elasticsearch([configuration["host"]])
-
-
 	# Attempt to write a typemapping first
-	typemapping = json.dumps(
-	{
+	typemapping = {
 		"template" : "enop_flarm*",
 		"mappings" : {
 			elastic_type : {
@@ -50,30 +56,39 @@ def main():
 				}
 			}
 		}
-	})
+	}
 
 
-	# For single index:
-	#es.indices.create(index="enop_flarm", body=typemapping, ignore=400)
 	# For timestamped index add a template:
-	es.indices.put_template(name="enop_template", body=typemapping)
+	for es in ess:
+		# TODO: This should be reenabled, but sometimes you do not have template rights...
+		#es.indices.put_template(name="enop_template", body=json.dumps(typemapping))
 
-	#exit(0)
+		# Optionally just create one index
+		#es.indices.create(index="enop_flarm", body=json.dumps(typemapping))
+		pass
 
-	#
-	# Keep this alive and waiting for lines
-	if args.input_file:
-		file = open(args.input_file, "r")
-		for line in file:
-			parseline(line)
-		file.close()
-	else: 
-		while True:
-			line = sys.stdin.readline()
-			parseline(line)
+	try:
+		# Keep this alive and waiting for lines
+		if args.input_file:
+			file = open(args.input_file, "r")
+			for line in file:
+				parseline(line)
+			file.close()
+		else: 
+			# For stdin, had to write a custom reader...
+			buff = ''
+			while True:
+				buff += sys.stdin.read(1)
+				if buff.endswith('\n'):
+					parseline(buff)
+					buff = ''
+	except KeyboardInterrupt:
+		sys.stdout.flush()
+		pass
 
 def parseline(line):
-	global es, args
+	global ess, args
 
 	fieldsre = re.search("([0-9.]+)MHz:[ ]+[0-9]:[0-9]:([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)dB[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
 
@@ -81,7 +96,15 @@ def parseline(line):
 	if not args.no_pass_through:
 		print line.rstrip()
 
-	if not fieldsre: 
+	if not fieldsre:
+		return
+		# For prototyping it may be interesting to upload the raw lines
+		data = {}
+		data["line"] = line
+		for es in ess:
+			es.index(index="enop_rawlog", doc_type="lines", body=json.dumps(data))
+
+		# But you should always return here
 		return
 
 	try:
@@ -111,7 +134,8 @@ def parseline(line):
 
 		# Ship the data!
 		if not args.dry_run:
-			es.index(index=timeindex, doc_type=elastic_type, body=json.dumps(data))
+			for es in ess:
+				es.index(index=timeindex, doc_type=elastic_type, body=json.dumps(data))
 
 		print "** UPLOADED TO ES: **", data
 
