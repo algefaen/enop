@@ -90,19 +90,26 @@ def main():
 def parseline(line):
 	global ess, args
 
-	fieldsre = re.search("([0-9.]+)MHz:[ ]+[0-9]:[0-9]:([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)dB[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
+	fieldsre = re.search("([0-9.]+)MHz:[ ]+([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)dB[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
 
 	# Forward stdin
 	if not args.no_pass_through:
 		print line.rstrip()
 
 	if not fieldsre:
-		return
+		if re.match("(APRS ->)|(APRS time)", line):
+			return
 		# For prototyping it may be interesting to upload the raw lines
 		data = {}
 		data["line"] = line
+
+		rightnow = datetime.datetime.now()
+		data["timestamp"] = rightnow.isoformat()
+
 		for es in ess:
 			es.index(index="enop_rawlog", doc_type="lines", body=json.dumps(data))
+
+		print "** UPLOADED LOG ENTRY TO ES **"
 
 		# But you should always return here
 		return
@@ -112,7 +119,7 @@ def parseline(line):
 
 		# 1 indexed	
 		data["mhz"] = float(fieldsre.group(1))
-		data["identifier"] = fieldsre.group(2)
+		data["identifier"] = fieldsre.group(2).split(":")[-1]
 		data["position"] = fieldsre.group(3).replace(" ","").replace("[","").replace("]","")
 		data["altitude"] = float(fieldsre.group(4))
 		data["vertical_speed"] = float(fieldsre.group(5))
