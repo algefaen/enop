@@ -13,12 +13,12 @@ int main()
 {
 
 	/* Open File Descriptor */
-	int USB = open( "/dev/ttyUSB0", O_RDONLY | O_NOCTTY );
+	int USB = open( "/dev/wind", O_RDONLY | O_NOCTTY );
 
 	/* Error Handling */
 	if ( USB < 0 )
 	{
-		perror("Error when opening /dev/ttyUSB0");
+		perror("Error when opening /dev/wind");
 		return 1;
 	}
 
