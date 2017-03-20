@@ -96,28 +96,29 @@ def average_and_upload
 end
 
 def process(line)
-	begin
-		elements = line.split(',')
-		raise ArgumentError unless elements[0] == "$IIMWV"
-		raise ArgumentError unless elements.size == 6
-		dir = elements[1].to_i
-		mps = elements[3].to_f
-		puts "read: #{mps} from #{dir}"
-		WIND_READINGS << { :dir => dir, :mps => mps }
-		if WIND_READINGS.size >= UPLOAD_FREQUENCY
-			average_and_upload
-		end
-	rescue ArgumentError
-		STDERR.puts("bad data")
+	elements = line.split(',')
+	raise ArgumentError unless elements[0] == "$IIMWV"
+	raise ArgumentError unless elements.size == 6
+	dir = elements[1].to_i
+	mps = elements[3].to_f
+	puts "read: #{mps} from #{dir}"
+	WIND_READINGS << { :dir => dir, :mps => mps }
+	if WIND_READINGS.size >= UPLOAD_FREQUENCY
+		average_and_upload
 	end
 end
 
 # Loop in case the FIFO dies
 while true
-	File.open("./wind", "r") { |fifo|
-		while line = fifo.gets
-			process(line)
-			STDOUT.flush
-		end
-	}
+	begin
+		File.open("./wind", "r") { |fifo|
+			while line = fifo.gets
+				process(line)
+				STDOUT.flush
+			end
+		}
+	rescue ArgumentError
+		STDERR.puts("bad data")
+		sleep 5
+	end
 end

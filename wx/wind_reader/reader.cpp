@@ -81,13 +81,10 @@ int main()
 		}
 
 
-		if (n < 0)
+		if (n <= 0)
 		{
 			perror("Error when reading");
-		}
-		else if (n == 0)
-		{
-			printf("Read nothing!\n");
+			exit(1);
 		}
 		else
 		{
