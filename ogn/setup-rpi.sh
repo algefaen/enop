@@ -6,6 +6,6 @@ sudo chown root ogn-rf
 sudo chmod a+s  ogn-rf
 sudo chown root rtlsdr-ogn
 sudo chmod a+s  rtlsdr-ogn
-sudo mknod gpu_dev c 100 0
-mkfifo ogn-rf.fifo
+# sudo mknod gpu_dev c 100 0
+# mkfifo ogn-rf.fifo
 
