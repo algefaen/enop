@@ -90,15 +90,15 @@ def main():
 def parseline(line):
 	global ess, args
 
-	fieldsre = re.search("([0-9.]+)MHz:[ ]+([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)dB[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
+	fieldsre = re.search("([0-9.]+)MHz:[ ]+([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([0-9a-z_]+)[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)\/([(0-9.]+)dB\/([0-9]+)[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
 
 	# Forward stdin
 	if not args.no_pass_through:
 		print line.rstrip()
 
 	if not fieldsre:
-		if re.match("(APRS ->)|(APRS time)", line):
-			return
+		#if re.match("(APRS ->)|(APRS time)", line):
+		#	return
 		# For prototyping it may be interesting to upload the raw lines
 		data = {}
 		data["line"] = line
@@ -109,7 +109,7 @@ def parseline(line):
 		for es in ess:
 			es.index(index="enop_rawlog", doc_type="lines", body=json.dumps(data))
 
-		print "** UPLOADED LOG ENTRY TO ES **"
+		print "** Uploaded raw log line to ES **"
 
 		# But you should always return here
 		return
@@ -126,9 +126,11 @@ def parseline(line):
 		data["speed"] = float(fieldsre.group(6))
 		data["heading"] = float(fieldsre.group(7))
 		data["heading_change"] = float(fieldsre.group(8))
-		data["signal_strength"] = float(fieldsre.group(13))
-		data["distance"] = float(fieldsre.group(15))
-		data["bearing"] = float(fieldsre.group(16))
+		data["signal_strength0"] = float(fieldsre.group(14))
+		data["signal_strength1"] = float(fieldsre.group(15))
+		data["distance"] = float(fieldsre.group(18))
+		data["bearing"] = float(fieldsre.group(19))
+		data["bearing_change"] = float(fieldsre.group(20))
 
 		rightnow = datetime.datetime.now()
 		data["timestamp"] = rightnow.isoformat()
@@ -144,7 +146,7 @@ def parseline(line):
 			for es in ess:
 				es.index(index=timeindex, doc_type=elastic_type, body=json.dumps(data))
 
-		print "** UPLOADED TO ES: **", data
+		print "** Position data detected, uploading to ES: **", data
 
 	except:
 		print "** Something went wrong with ogn_decode_parser: ",sys.exc_info()
