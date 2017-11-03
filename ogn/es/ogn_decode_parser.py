@@ -90,7 +90,7 @@ def main():
 def parseline(line):
 	global ess, args
 
-	fieldsre = re.search("([0-9.]+)MHz:[ ]+([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)dB[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
+	fieldsre = re.search("([0-9.]+)MHz:[ ]+([^ ]+)[ ]+[0-9]+:[ ]+(\[.*\])deg[ ]+([0-9]+)m[ ]+([-+]?[0-9.]+)m\/s[ ]+([0-9.]+)m\/s[ ]+([0-9.]+)deg[ ]+([+-]?[0-9.]+)deg\/sec[ ]+([0-9]+)[ ]+([0-9]+)x([0-9]+)m[ ]+([0-9a-z_]+)[ ]+([-+]?[0-9.]+)kHz[ ]+([(0-9.]+)\/([(0-9.]+)dB\/([0-9]+)[ ]+([0-9])e[ ]+([0-9.]+)km[ ]+([0-9.]+)deg[ ]+([-+]+[0-9.]+)deg", line)
 
 	# Forward stdin
 	if not args.no_pass_through:
@@ -126,9 +126,11 @@ def parseline(line):
 		data["speed"] = float(fieldsre.group(6))
 		data["heading"] = float(fieldsre.group(7))
 		data["heading_change"] = float(fieldsre.group(8))
-		data["signal_strength"] = float(fieldsre.group(13))
-		data["distance"] = float(fieldsre.group(15))
-		data["bearing"] = float(fieldsre.group(16))
+		data["signal_strength0"] = float(fieldsre.group(14))
+		data["signal_strength1"] = float(fieldsre.group(15))
+		data["distance"] = float(fieldsre.group(18))
+		data["bearing"] = float(fieldsre.group(19))
+		data["bearing_change"] = float(fieldsre.group(20))
 
 		rightnow = datetime.datetime.now()
 		data["timestamp"] = rightnow.isoformat()
