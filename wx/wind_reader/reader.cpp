@@ -48,6 +48,7 @@ int main()
 	tty.c_cc[VTIME]     =	5;		    // 0.5 seconds read timeout
 	tty.c_cflag	|=  CREAD | CLOCAL;	// turn on READ & ignore ctrl lines
 
+
 	/* Make raw */
 	cfmakeraw(&tty);
 
@@ -59,6 +60,10 @@ int main()
 		return 1;
 	}
 
+	fd_set set;
+	struct timeval timeout;
+	FD_ZERO(&set);
+	FD_SET(USB, &set);
 	while (true) 
 	{
 
@@ -67,8 +72,21 @@ int main()
 		char buf[2] = { 0 };
 		const size_t result_size = 1024;
 		char result[result_size] = { 0 };
+
 		do
 		{
+			fprintf(stderr, ".");
+			timeout.tv_sec = 5;
+			timeout.tv_usec = 0;
+			int sel_return = select(USB+1, &set, NULL, NULL, &timeout);
+			switch (sel_return) {
+				case -1:
+					perror("error while reading");
+					exit(1);
+				case 0: 
+					fprintf(stderr, "timeout while waiting for read");
+					exit(1);
+			}
 			n = read( USB, &buf, 1 );
 			strcat(result, buf);
 		}

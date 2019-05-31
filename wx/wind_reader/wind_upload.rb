@@ -13,10 +13,42 @@ WIND_READINGS = []
 
 UPLOAD_FREQUENCY = 10
 
+def upload_windy(avgdir, avgmps, gustmps)
+	uri = URI("https://stations.windy.com/pws/update/#{WINDYKEY}")
+
+	params = {
+		:winddir => avgdir,
+		:wind => avgmps,
+		:gust => gustmps
+		}
+
+	begin
+		slow_params = YAML.load_file('/tmp/meteo.yaml')
+		time_diff = Time.now - Time.parse(slow_params[:time])
+		if time_diff > 300
+			raise "more than 300s since last meteo update in /tmp/meteo.yaml"
+		end
+		params[:tempf] = slow_params[:tempf]
+		params[:humidity] = slow_params[:humidity]
+		params[:baromin] = slow_params[:baromin]
+	rescue Exception => e
+		puts("slow params fail: #{e}")
+	end
+
+	uri.query = URI.encode_www_form(params)
+
+	begin
+		res = Net::HTTP.get_response(uri)
+		puts res.body if res.is_a?(Net::HTTPSuccess)
+	rescue Exception => e
+		puts "windy upload failed: #{e.message}"
+	end
+end
+
 def upload_wps(avgdir, avgmps, gustdir, gustmps)
 	uri = URI('http://rtupdate.wunderground.com/weatherstation/updateweatherstation.php')
-	
-	params = { 
+
+	params = {
 		:action => "updateraw", 
 		:ID => "ISORTRON10",
 		:PASSWORD => WUNDERPASS,
@@ -31,15 +63,12 @@ def upload_wps(avgdir, avgmps, gustdir, gustmps)
 
 	begin
 		slow_params = YAML.load_file('/tmp/meteo.yaml')
-		p slow_params
 		time_diff = Time.now - Time.parse(slow_params[:time])
-		p time_diff
 		if time_diff > 300
 			raise "more than 300s since last meteo update in /tmp/meteo.yaml"
 		end
 		slow_params.delete("time")
 		params.merge!(slow_params)
-		p params
 	rescue Exception => e
 		puts("slow params fail: #{e}")
 	end
@@ -91,6 +120,7 @@ def average_and_upload
 	avgdir = average_direction(WIND_READINGS.map { |e| e[:dir] })
 	gust = WIND_READINGS.max_by{ |e| e[:mps] }
 	upload_wps(avgdir, avgmps, gust[:dir], gust[:mps])
+	upload_windy(avgdir, avgmps, gust[:mps])
 	upload_es(avgdir, avgmps, gust[:dir], gust[:mps])
 	WIND_READINGS.clear
 end
